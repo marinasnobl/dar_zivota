@@ -39,7 +39,6 @@
 </template>
 
 <script>
-import { firebaseApp } from "@/firebase.js";
 import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
 
 export default {
