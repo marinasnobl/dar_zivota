@@ -21,9 +21,19 @@
               <label for="exampleInputPassword1">Lozinka</label>
               <input
                 type="password"
-                v-model="password"
+                v-model="password1"
                 class="form-control"
                 id="exampleInputPassword1"
+                placeholder="Password"
+              />
+            </div>
+            <div class="form-group">
+              <label for="exampleInputPassword1">Ponovite lozinku</label>
+              <input
+                type="password"
+                v-model="password2"
+                class="form-control"
+                id="exampleInputPassword2"
                 placeholder="Password"
               />
             </div>
@@ -46,22 +56,34 @@ export default {
   name: "Registracija",
   data() {
     return {
-      username: "",
-      password: "",
+      username: null,
+      password1: null,
+      password2: null,
     };
   },
   methods: {
     signup() {
-      const auth = getAuth();
-      createUserWithEmailAndPassword(auth,this.username, this.password)
-        .then( 
-            function() {
-                console.log('Uspjesna registracija');
+      if (
+        this.password1 == null ||
+        this.password2 == null ||
+        this.username == null
+      ) {
+        alert("Popunite sva potrebna polja");
+      } else {
+        if (this.password1 == this.password2) {
+          const auth = getAuth();
+          createUserWithEmailAndPassword(auth, this.username, this.password1)
+            .then((result) => {
+              alert("Uspjesna registracija");
+              this.$router.replace({name: 'Home'});
             })
-        .catch(function(error){
-            console.error('Došlo je do greške', error)
-        });
-    console.log('Nastavak');
+            .catch(function (error) {
+              console.error("Došlo je do greške", error);
+            });
+        } else {
+          alert("Lozinke moraju biti jednake!");
+        }
+      }
     },
   },
 };

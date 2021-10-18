@@ -1,21 +1,9 @@
-
-
-      
-        
-        
-        
-        
-      </div>
-    </div>
-  </div>
-</nav>
-
 <template>
   <div id="app">
     <div id="nav">
       <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <div class="container-fluid">
-          <a class="navbar-brand" href="#">DAR ŽIVOTA</a>
+          <a class="navbar-brand" href="#"><router-link to="/"><img src="@/assets/logo.png" height="40px"></router-link></a>
           <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
           </button>
@@ -30,7 +18,7 @@
               <a v-if="!store.currentUser" class="nav-link" href="#">
                 <router-link to="/signup">Registracija</router-link>
               </a>
-              <a v-if="store.currentUser" href="#" @click="logout()" class="nav-link disabled">
+              <a v-if="store.currentUser" href="#" @click="logout()" class="nav-link">
                 Odjava
               </a>
             </div>

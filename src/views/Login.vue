@@ -16,9 +16,7 @@
                 aria-describedby="emailHelp"
                 placeholder="Enter email"
               />
-              <small id="emailHelp" class="form-text text-muted"
-                >We'll never share your email with anyone else.</small
-              >
+              
             </div>
             <div class="form-group">
               <label for="exampleInputPassword1">Lozinka</label>
@@ -30,10 +28,15 @@
                 placeholder="Password"
               />
             </div>
-            <button type="button" @click="login()" class="btn btn-primary">Pošalji</button>
+            <button type="submit" @click="login()" class="btn btn-primary">Prijava</button>
           </form>
         </div>
         <div class="col-sm"></div>
+      </div>
+      <div>
+        <a href="#" >
+           <router-link to="/signup">Nemate račun? Registrirajte se...</router-link>
+        </a>
       </div>
     </div>
   </div>
@@ -61,6 +64,7 @@ export default {
       })
       .catch(function(error) {
         console.error("Greška", error)
+        alert("Greška e-maila ili lozinke")
       });
     }
   }  
