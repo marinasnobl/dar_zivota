@@ -37,9 +37,21 @@ export default {
       let duration = moment.duration(end.diff(start));
       let days = duration.asDays();
       days =  Math.round(days);
-      console.log(days);
+      if (days<0){
+        alert('Unjeli ste pogrešan datum!');
+      }
+        else{
+          if (days <= 84){
+             this.$router.replace({name: 'PrvoTromjesecje'});
+          }
+          if (days > 84 && days <= 182){
+             this.$router.replace({name: 'DrugoTromjesecje'});
+          }
+          if (days > 182){
+             this.$router.replace({name: 'TreceTromjesecje'});
+          }
+        }
     },
   },
 }
-
 </script>

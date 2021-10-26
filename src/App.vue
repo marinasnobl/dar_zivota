@@ -21,6 +21,9 @@
               <a v-if="store.currentUser" class="nav-link" href="#">
                 <router-link to="/entry">Upis</router-link>
               </a>
+              <a v-if="store.currentUser" class="nav-link" href="#">
+                <router-link to="/mojDnevnik">Moj dnevnik</router-link>
+              </a>
               <a v-if="store.currentUser" href="#" @click="logout()" class="nav-link">
                 Odjava
               </a>

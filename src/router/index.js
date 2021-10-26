@@ -25,6 +25,26 @@ const routes = [
     name: 'Entry',
     component: () => import('../views/Entry.vue')
   },
+  {
+    path: '/prvoTromjesecje',
+    name: 'PrvoTromjesecje',
+    component: () => import('../views/PrvoTromjesecje.vue')
+  },
+  {
+    path: '/drugoTromjesecje',
+    name: 'DrugoTromjesecje',
+    component: () => import('../views/DrugoTromjesecje.vue')
+  },
+  {
+    path: '/treceTromjesecje',
+    name: 'TreceTromjesecje',
+    component: () => import('../views/TreceTromjesecje.vue')
+  },
+  {
+    path: '/mojDnevnik',
+    name: 'MojDnevnik',
+    component: () => import('../views/MojDnevnik.vue')
+  },
 ]
 
 const router = new VueRouter({

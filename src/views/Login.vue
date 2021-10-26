@@ -50,21 +50,21 @@ export default {
   name:'login',
   data() {
     return {
-      username:"",
-      password:"",
+      username:null,
+      password:null,
     }
   },
   methods: {
     login() {
       const auth = getAuth();
-      signInWithEmailAndPassword(auth,this.username, this.password)
+      signInWithEmailAndPassword(auth, this.username, this.password)
       .then((result)=>{
         console.log("Uspjesna prijava", result);
         this.$router.replace({name: 'Home'});
       })
-      .catch(function(error) {
-        console.error("Greška", error)
-        alert("Greška e-maila ili lozinke")
+      .catch((error) => {
+        console.error("Greška", error);
+        alert("Greška e-maila ili lozinke");
       });
     }
   }  
