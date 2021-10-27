@@ -19,5 +19,5 @@ const db = getFirestore(firebaseApp);
 export { 
     firebaseApp,
     firebaseAuth,
-    db
+    db,
 }
