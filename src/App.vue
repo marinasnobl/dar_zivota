@@ -27,6 +27,9 @@
               <a v-if="store.currentUser" href="#" @click="logout()" class="nav-link">
                 Odjava
               </a>
+              <a v-if="store.currentUser" class="nav-link">
+                {{store.currentUser}}
+              </a>
             </div>
           </div>
         </div>

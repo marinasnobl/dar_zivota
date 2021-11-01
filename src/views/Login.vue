@@ -28,7 +28,7 @@
                 placeholder="Password"
               />
             </div>
-            <button type="submit" @click="login()" class="btn btn-primary">Prijava</button>
+            <button type="button" @click="login()" class="btn btn-primary">Prijava</button>
           </form>
         </div>
         <div class="col-sm"></div>
@@ -58,8 +58,7 @@ export default {
     login() {
       const auth = getAuth();
       signInWithEmailAndPassword(auth, this.username, this.password)
-      .then((result)=>{
-        console.log("Uspjesna prijava", result);
+      .then((UserCredential)=>{
         this.$router.replace({name: 'Home'});
       })
       .catch((error) => {

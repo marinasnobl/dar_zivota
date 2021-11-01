@@ -1,6 +1,8 @@
 <template>
   <div class="card">
-    <div class="card-body">{{vrijemeZapisa}}<br>{{zapis}}</div>
+    <div class="card-body">{{vrijemeZapisa}}<br>{{zapis}} 
+    
+    </div>
   </div>
 </template>
 

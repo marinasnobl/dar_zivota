@@ -79,10 +79,10 @@
           <div class="card">
             <div class="card-body">
               <zapis-dnevnika
-                v-for="element1 in ispis1"
-                :key="element1"
-                :zapis="element1.biljeska"
-                :vrijeme="element1.datumBiljeske"
+                v-for="element in ispis1"
+                :key="element.id"
+                :zapis="element.biljeska"
+                :vrijeme="element.datumBiljeske"
               />
             </div>
           </div>
@@ -91,10 +91,10 @@
           <div class="card">
             <div class="card-body">
               <zapis-dnevnika
-                v-for="element2 in ispis2"
-                :key="element2"
-                :zapis="element2.biljeska"
-                :vrijeme="element2.datumBiljeske"
+                v-for="element in ispis2"
+                :key="element.id"
+                :zapis="element.biljeska"
+                :vrijeme="element.datumBiljeske"
               />
             </div>
           </div>
@@ -103,10 +103,10 @@
           <div class="card">
             <div class="card-body">
               <zapis-dnevnika
-                v-for="element3 in ispis3"
-                :key="element3"
-                :zapis="element3.biljeska"
-                :vrijeme="element3.datumZaPregled"
+                v-for="element in ispis3"
+                :key="element.id"
+                :zapis="element.biljeska"
+                :vrijeme="element.datumZaPregled"
               />
             </div>
           </div>
@@ -120,7 +120,7 @@ import Datepicker from "vuejs-datepicker";
 import { hr } from "vuejs-datepicker/dist/locale";
 import moment, { now } from "moment";
 import currentUser from "@/store";
-import { collection, addDoc, getDocs, orderBy, where } from "firebase/firestore";
+import { collection, addDoc, getDocs, orderBy, where, query } from "firebase/firestore";
 import { db } from "@/firebase";
 import ZapisDnevnika from "@/components/ZapisDnevnika.vue";
 
@@ -128,7 +128,7 @@ export default {
   name: "Odabir",
   data() {
     return {
-      datum: "",
+      datum: null,
       text1: null,
       text2: null,
       text3: null,
@@ -145,8 +145,8 @@ export default {
   },
   methods: {
     dohvatiZabiljesku1() {
-      getDocs(collection(db, "razvoj_djeteta"), where('korisnik', '==', 'alensnobl@gmail.com'))
-      .then((query) => {
+      const q = query(collection(db, "razvoj_djeteta"), where('korisnik', 'in', [currentUser] ))
+      getDocs(q).then((query) => {
         this.ispis1 = [];
         query.forEach((doc) => {
           const data1 = doc.data();
@@ -159,8 +159,8 @@ export default {
       });
     },
     dohvatiZabiljesku2() {
-      getDocs(collection(db, "promjene_kod_majke"), where('korisnik', '==', currentUser))
-      .then((query) => {
+      const q = query(collection(db, "promjene_kod_majke"), where('korisnik', 'in', [currentUser] ))
+      getDocs(q).then((query) => {
         this.ispis2 = [];
         query.forEach((doc) => {
           const data2 = doc.data();
@@ -173,8 +173,8 @@ export default {
       });
     },
     dohvatiZabiljesku3() {
-      getDocs(collection(db, "pregled_kod_ginekologa"), where('korisnik', 'in', currentUser))
-      .then((query) => {
+      const q = query(collection(db, "pregled_kod_ginekologa"), where('korisnik', 'in', [currentUser]))
+      getDocs(q).then((query) => {
         this.ispis3 = [];
         query.forEach((doc) => {
           const data3 = doc.data();
@@ -188,7 +188,7 @@ export default {
     },
     unosRD() {
       if (this.text1 == null) {
-        alert("Niste unjeli zabilješku");
+        alert("Niste unjeli bilješku");
       } else {
         try {
           addDoc(collection(db, "razvoj_djeteta"), {
@@ -196,7 +196,8 @@ export default {
             korisnik: currentUser,
             vrijemeUnosa: Date.now(),
           });
-          alert("Zabilješka je unesena");
+          alert("Bilješka je unesena");
+          this.text1=null;
           this.dohvatiZabiljesku1();
         } catch (e) {
           console.error(e);
@@ -205,7 +206,7 @@ export default {
     },
     unosPKD() {
       if (this.text2 == null) {
-        alert("Niste unjeli zabilješku");
+        alert("Niste unjeli bilješku");
       } else {
         try {
           addDoc(collection(db, "promjene_kod_majke"), {
@@ -213,7 +214,8 @@ export default {
             korisnik: currentUser,
             vrijemeUnosa: Date.now(),
           });
-          alert("Zabilješka je unesena");
+          alert("Bilješka je unesena");
+          this.text2=null;
           this.dohvatiZabiljesku2();
         } catch (e) {
           console.error(e);
@@ -221,8 +223,8 @@ export default {
       }
     },
     unosPKG() {
-      if (this.text3 == null) {
-        alert("Niste unjeli zabilješku");
+      if (this.text3 == null || this.datum==null) {
+        alert("Niste unjeli bilješku ili datum pregleda");
       } else {
         try {
           addDoc(collection(db, "pregled_kod_ginekologa"), {
@@ -231,7 +233,9 @@ export default {
             vrijemeUnosa: Date.now(),
             datumPregleda: moment(this.datum).valueOf(),
           });
-          alert("Zabilješka je unesena");
+          alert("Bilješka je unesena");
+          this.text3=null;
+          this.datum=null;
           this.dohvatiZabiljesku3();
         } catch (e) {
           console.error(e);

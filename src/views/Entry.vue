@@ -9,7 +9,7 @@
     <datepicker :language="hr" v-model="datum"></datepicker>
     </h2>
   <div> 
-     <button type="submit" @click="izracun()" class="btn btn-primary">Izračunaj</button>
+     <button type="button" @click="izracun()" class="btn btn-primary">Izračunaj</button>
   </div>
   </div>
 </template>
