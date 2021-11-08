@@ -1,12 +1,11 @@
 <template>
+
   <div class="home">
-    <h1><img src="@/assets/logo2.png" /></h1>
-    <p></p>
-    <h2>Prvo tromjesečje</h2>
+    <img src="@/assets/prvo_tromjesecje.png" /><br />
     <div class="container">
       <div class="row">
-        <div class="col">Savjeti</div>
-        <div class="col">Duhovnost</div>
+        <div class="col"><h2>Savjeti</h2></div>
+        <div class="col"><h2>Duhovnost</h2></div>
       </div>
       <div class="row">
         <div class="col">

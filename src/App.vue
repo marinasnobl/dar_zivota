@@ -19,7 +19,7 @@
                 <router-link to="/signup">Registracija</router-link>
               </a>
               <a v-if="store.currentUser" class="nav-link" href="#">
-                <router-link to="/entry">Upis</router-link>
+                <router-link to="/entry">Izračun trudnoće</router-link>
               </a>
               <a v-if="store.currentUser" class="nav-link" href="#">
                 <router-link to="/mojDnevnik">Moj dnevnik</router-link>
@@ -27,9 +27,9 @@
               <a v-if="store.currentUser" href="#" @click="logout()" class="nav-link">
                 Odjava
               </a>
-              <a v-if="store.currentUser" class="nav-link">
-                {{store.currentUser}}
-              </a>
+              <p v-if="store.currentUser" class="nav-link">
+              {{store.currentUser}}
+              </p>
             </div>
           </div>
         </div>
@@ -87,14 +87,20 @@ export default {
 
 #nav {
   padding: 30px;
-
+  div {
+    border-spacing: 0;
+  }
   a {
     font-weight: bold;
-    color: #2c3e50;
+    color: #178D7D;
 
     &.router-link-exact-active {
-      color: #42b983;
+      color: #0ec7ae;
     }
+  }
+  p{
+    color: #178D7D;
+    font-style: italic;
   }
 }
 </style>

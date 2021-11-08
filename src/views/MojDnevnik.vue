@@ -1,8 +1,8 @@
 <template>
   <div class="home">
-    <h1><img src="@/assets/logo2.png" /></h1>
+    <h1><img src="@/assets/moj_dnevnik.png" /></h1>
     <br />
-    <h2>Moj dnevnik</h2>
+   
     <div class="container">
       <div class="row row-cols-3">
         <div class="col">
@@ -24,8 +24,15 @@
               placeholder="Dodajte novu bilješku"
               aria-describedby="button-addon1"
             />
+            <button
+              class="btn btn-outline-secondary"
+              type="button"
+              id="button-addon1"
+              @click="obrisi1"
+            >
+              Obriši
+            </button>
           </div>
-          <br />
         </div>
         <div class="col">
           <h4>Promjene kod majke</h4>
@@ -46,8 +53,15 @@
               placeholder="Dodajte novu bilješku"
               aria-describedby="button-addon2"
             />
+            <button
+              class="btn btn-outline-secondary"
+              type="button"
+              id="button-addon1"
+              @click="obrisi2"
+            >
+              Obriši
+            </button>
           </div>
-          <br />
         </div>
         <div class="col">
           <h4>Pregled kod ginekologa</h4>
@@ -68,6 +82,14 @@
               placeholder="Dodajte novu bilješku"
               aria-describedby="button-addon3"
             />
+            <button
+              class="btn btn-outline-secondary"
+              type="button"
+              id="button-addon1"
+              @click="obrisi3"
+            >
+              Obriši
+            </button>
           </div>
           <datepicker :language="hr" v-model="datum"></datepicker><br />
         </div>
@@ -120,7 +142,7 @@ import Datepicker from "vuejs-datepicker";
 import { hr } from "vuejs-datepicker/dist/locale";
 import moment, { now } from "moment";
 import currentUser from "@/store";
-import { collection, addDoc, getDocs, orderBy, where, query } from "firebase/firestore";
+import { collection, addDoc, getDocs, doc, where, query, deleteDoc } from "firebase/firestore";
 import { db } from "@/firebase";
 import ZapisDnevnika from "@/components/ZapisDnevnika.vue";
 
@@ -144,6 +166,22 @@ export default {
     this.dohvatiZabiljesku3();
   },
   methods: {
+    obrisi1() {
+        deleteDoc(doc(db, 'razvoj_djeteta', ''))
+        console.log("Test")
+        alert("Uspješno obrisano")
+        this.dohvatiZabiljesku1();
+    },
+    obrisi2() {
+        deleteDoc(doc(db, 'promjene_kod_majke', ''))
+        alert("Obrisano")
+        this.dohvatiZabiljesku2();
+    },
+    obrisi3() {
+        deleteDoc(doc(db, 'pregled_kod_ginekologa', ''))
+        alert("Obrisano")
+        this.dohvatiZabiljesku3();
+    },
     dohvatiZabiljesku1() {
       const q = query(collection(db, "razvoj_djeteta"), where('korisnik', 'in', [currentUser] ))
       getDocs(q).then((query) => {
