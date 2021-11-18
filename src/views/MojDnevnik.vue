@@ -40,7 +40,7 @@
           <div class="input-group mb-3">
             <button
               class="btn btn-outline-secondary"
-              @click="unosPKD"
+              @click="unosPKM"
               type="button"
               id="button-addon2"
             >
@@ -145,6 +145,7 @@ import currentUser from "@/store";
 import { collection, addDoc, getDocs, doc, where, query, deleteDoc } from "firebase/firestore";
 import { db } from "@/firebase";
 import ZapisDnevnika from "@/components/ZapisDnevnika.vue";
+import store from '@/store';
 
 export default {
   name: "Odabir",
@@ -167,23 +168,23 @@ export default {
   },
   methods: {
     obrisi1() {
-        deleteDoc(doc(db, 'razvoj_djeteta', ''))
+        deleteDoc(doc(db, 'razvoj_djeteta', ''))//kod drugih navodnih znakova treba doći id od označene bilješke
         console.log("Test")
         alert("Uspješno obrisano")
         this.dohvatiZabiljesku1();
     },
     obrisi2() {
-        deleteDoc(doc(db, 'promjene_kod_majke', ''))
-        alert("Obrisano")
+        deleteDoc(doc(db, 'promjene_kod_majke', ''))//kod drugih navodnih znakova treba doći id od označene bilješke
+        alert("Uspješno obrisano")
         this.dohvatiZabiljesku2();
     },
     obrisi3() {
-        deleteDoc(doc(db, 'pregled_kod_ginekologa', ''))
-        alert("Obrisano")
+        deleteDoc(doc(db, 'pregled_kod_ginekologa', ''))//kod drugih navodnih znakova treba doći id od označene bilješke
+        alert("Uspješno obrisano")
         this.dohvatiZabiljesku3();
     },
     dohvatiZabiljesku1() {
-      const q = query(collection(db, "razvoj_djeteta"), where('korisnik', 'in', [currentUser] ))
+      const q = query(collection(db, store.currentUser), where('tip_zabiljeske', 'in', ['razvoj_djeteta'] ))
       getDocs(q).then((query) => {
         this.ispis1 = [];
         query.forEach((doc) => {
@@ -197,7 +198,7 @@ export default {
       });
     },
     dohvatiZabiljesku2() {
-      const q = query(collection(db, "promjene_kod_majke"), where('korisnik', 'in', [currentUser] ))
+      const q = query(collection(db, store.currentUser), where('tip_zabiljeske', 'in', ['promjene_kod_majke'] ))
       getDocs(q).then((query) => {
         this.ispis2 = [];
         query.forEach((doc) => {
@@ -211,7 +212,7 @@ export default {
       });
     },
     dohvatiZabiljesku3() {
-      const q = query(collection(db, "pregled_kod_ginekologa"), where('korisnik', 'in', [currentUser]))
+      const q = query(collection(db, store.currentUser), where('tip_zabiljeske', 'in', ['pregled_kod_ginekologa'] ))
       getDocs(q).then((query) => {
         this.ispis3 = [];
         query.forEach((doc) => {
@@ -229,9 +230,9 @@ export default {
         alert("Niste unjeli bilješku");
       } else {
         try {
-          addDoc(collection(db, "razvoj_djeteta"), {
+          addDoc(collection(db, store.currentUser), {
+            tip_zabiljeske: "razvoj_djeteta",
             zabiljeska: this.text1,
-            korisnik: currentUser,
             vrijemeUnosa: Date.now(),
           });
           alert("Bilješka je unesena");
@@ -242,14 +243,14 @@ export default {
         }
       }
     },
-    unosPKD() {
+    unosPKM() {
       if (this.text2 == null) {
         alert("Niste unjeli bilješku");
       } else {
         try {
-          addDoc(collection(db, "promjene_kod_majke"), {
+          addDoc(collection(db, store.currentUser), {
+            tip_zabiljeske: "promjene_kod_majke",
             zabiljeska: this.text2,
-            korisnik: currentUser,
             vrijemeUnosa: Date.now(),
           });
           alert("Bilješka je unesena");
@@ -265,9 +266,9 @@ export default {
         alert("Niste unjeli bilješku ili datum pregleda");
       } else {
         try {
-          addDoc(collection(db, "pregled_kod_ginekologa"), {
+          addDoc(collection(db, store.currentUser), {
+            tip_zabiljeske: "pregled_kod_ginekologa",
             zabiljeska: this.text3,
-            korisnik: currentUser,
             vrijemeUnosa: Date.now(),
             datumPregleda: moment(this.datum).valueOf(),
           });

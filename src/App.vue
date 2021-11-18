@@ -24,6 +24,15 @@
               <a v-if="store.currentUser" class="nav-link" href="#">
                 <router-link to="/mojDnevnik">Moj dnevnik</router-link>
               </a>
+              <a v-if="store.dani_trudnoce <= 84 && store.currentUser"  class="nav-link" href="#">
+                <router-link to="/PrvoTromjesecje">Prvo tromjesecje</router-link>
+              </a>
+              <a v-if="store.dani_trudnoce > 84 && store.dani_trudnoce <= 182 && store.currentUser" class="nav-link" href="#">
+                <router-link to="/DrugoTromjesecje">Drugo tromjesecje</router-link>
+              </a>
+              <a v-if="store.dani_trudnoce > 182 && store.currentUser" class="nav-link" href="#">
+                <router-link to="/TreceTromjesecje">Treće tromjesecje</router-link>
+              </a>
               <a v-if="store.currentUser" href="#" @click="logout()" class="nav-link">
                 Odjava
               </a>
@@ -56,7 +65,6 @@ onAuthStateChanged(auth, (user) => {
     store.currentUser = null;
   }
 });
-
 export default {
   name: "app",
   data() {
