@@ -8,7 +8,7 @@
       Za izračun odabrati datum zadnje mjesečnice
     </div>
     <div v-if="store.datum_zadnje_mjesecnice">
-      Datum zadnje mjesečnice postavljen na {{store.datum_zadnje_mjesecnice}}<br>
+      Datum zadnje mjesečnice postavljen na {{ this.datum_mjesecnice }}<br>
       Za ponovno postavljanje datuma, odaberite datum iz kalendara 
     </div>
     <br />
@@ -33,7 +33,7 @@
 import Datepicker from "vuejs-datepicker";
 import { hr } from "vuejs-datepicker/dist/locale";
 import moment, { now } from "moment";
-import { collection, addDoc, query, where, getDocs, updateDoc, doc, setDoc } from "firebase/firestore";
+import { collection, addDoc, updateDoc, doc} from "firebase/firestore";
 import { db } from "@/firebase";
 import store from "@/store";
 
@@ -43,34 +43,19 @@ export default {
     return {
       datum: null,
       hr: hr,
-      datum_mjesecnice: "",
+      datum_mjesecnice: null,
       store,
     };
   },
   components: {
     Datepicker,
   },
-  mounted() {
+  mounted(){
     this.provjera();
   },
   methods: {
-    provjera() {
-      console.log("Provjera dali postoji datum u storu");
-      console.log("Datum iz stora prije pozivanja firebase: ", store.datum_zadnje_mjesecnice);
-      const q = query(
-        collection(db, store.currentUser),
-        where("tip_zabiljeske", "in", ["datum_zadnje_mjesecnice"])
-      );
-      getDocs(q).then((query) => {
-        query.forEach((doc) => {
-          const data1 = doc.data();
-          this.datum_mjesecnice = data1.datum_zadnje_mjesecnice;
-        })
-      })
-      let handle = setTimeout(()=> {
-        store.datum_zadnje_mjesecnice = moment(this.datum_mjesecnice).toDate().toLocaleDateString()
-      }, 2000)
-
+    provjera(){
+      this.datum_mjesecnice = moment(store.datum_zadnje_mjesecnice).toDate().toLocaleDateString();
     },
     izracun() {
       if(store.datum_zadnje_mjesecnice==null){
