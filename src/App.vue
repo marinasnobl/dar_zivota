@@ -45,7 +45,7 @@
                 href="#"
               >
                 <router-link to="/PrvoTromjesecje"
-                  >Prvo tromjesecje</router-link
+                  >Prvo tromjesečje</router-link
                 >
               </a>
               <a
@@ -58,7 +58,7 @@
                 href="#"
               >
                 <router-link to="/DrugoTromjesecje"
-                  >Drugo tromjesecje</router-link
+                  >Drugo tromjesečje</router-link
                 >
               </a>
               <a
@@ -67,7 +67,7 @@
                 href="#"
               >
                 <router-link to="/TreceTromjesecje"
-                  >Treće tromjesecje</router-link
+                  >Treće tromjesečje</router-link
                 >
               </a>
               <a

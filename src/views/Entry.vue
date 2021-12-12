@@ -17,12 +17,13 @@
         <div class="col"></div>
         
         <div class="col">
-          <datepicker :language="hr" v-model="datum"></datepicker>
-        </div>
-        <div class="col">
+          <datepicker :language="hr" v-model="datum" :clear-button="true" placeholder="Odaberite datum"></datepicker> <br>
           <button type="button" @click="izracun()" class="btn btn-primary">
             Izračunaj
           </button>
+        </div>
+        <div class="col">
+         
         </div>
       </div>
     </div>
@@ -68,7 +69,7 @@ export default {
          console.error(e)
        }
       }else {
-        const Ref = doc(db, store.currentUser, 'JkPiOVkp1wYA97zam5c9');
+        const Ref = doc(db, store.currentUser, 'heHJweGVFN25xzvhLXfu');
         updateDoc(Ref, {datum_zadnje_mjesecnice: moment(this.datum).valueOf()})
       }
       let start = moment(this.datum);
