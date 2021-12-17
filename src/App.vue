@@ -79,8 +79,11 @@
                 Odjava
               </a>
               <p v-if="store.currentUser" class="nav-link">
-                {{ store.currentUser }} {{ store.dani_trudnoce }}
+                {{ store.currentUser }}
               </p>
+               <p v-if="store.dani_trudnoce && store.currentUser" class="nav-link">
+                {{ store.dani_trudnoce }}
+               </p>
             </div>
           </div>
         </div>
@@ -110,7 +113,6 @@ onAuthStateChanged(auth, (user) => {
   }
 });
 
-
 export default {
   name: "app",
   data() {
@@ -118,34 +120,34 @@ export default {
       store,
     };
   },
-  mounted(){
+  mounted() {
     this.provjera();
   },
   methods: {
-    provjera(){
-      let handle1= setTimeout(() => {
-  console.log("Pozivanje firebase");
-  const q = query(
-    collection(db, store.currentUser),
-    where("tip_zabiljeske", "in", ["datum_zadnje_mjesecnice"])
-  );
-  console.log("Dohvacanje podatka");
-  getDocs(q).then((query) => {
-    query.forEach((doc) => {
-      const data1 = doc.data();
-      store.datum_zadnje_mjesecnice = data1.datum_zadnje_mjesecnice;
-    });
-  });
-}, 2000);
-let handle2= setTimeout(() => {
-console.log("Izracun trudnoce");
-let start = moment(store.datum_zadnje_mjesecnice);
-let end = moment(now());
-let duration = moment.duration(end.diff(start));
-let days = duration.asDays();
-days = Math.round(days);
-store.dani_trudnoce = days;
-}, 3000);
+    provjera() {
+      let handle1 = setTimeout(() => {
+        console.log("Pozivanje firebase");
+        const q = query(
+          collection(db, store.currentUser),
+          where("tip_zabiljeske", "in", ["datum_zadnje_mjesecnice"])
+        );
+        console.log("Dohvacanje podatka");
+        getDocs(q).then((query) => {
+          query.forEach((doc) => {
+            const data1 = doc.data();
+            store.datum_zadnje_mjesecnice = data1.datum_zadnje_mjesecnice;
+          });
+        });
+      }, 3000);
+      let handle2 = setTimeout(() => {
+        console.log("Izracun trudnoce");
+        let start = moment(store.datum_zadnje_mjesecnice);
+        let end = moment(now());
+        let duration = moment.duration(end.diff(start));
+        let days = duration.asDays();
+        days = Math.round(days);
+        store.dani_trudnoce = days;
+      }, 5000);
     },
     logout() {
       const auth = getAuth();
