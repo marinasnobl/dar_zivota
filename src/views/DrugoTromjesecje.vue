@@ -1,5 +1,4 @@
 <template>
-
   <div class="home">
     <img src="@/assets/drugo_tromjesecje.png" /><br />
     <div class="container">
@@ -17,6 +16,14 @@
           />
         </div>
         <div class="col">
+          <div class="col">
+          <kartice-savjeti
+          v-for="element in ispis2"
+          :key="element.id"
+          :naslov="element.naslov"
+          :text="element.text"
+          />
+          </div>
         </div>
       </div>
     </div>
@@ -32,6 +39,7 @@ export default {
   data() {
     return{
       ispis1: [],
+      ispis2: []
     }
   },
   mounted(){
@@ -39,8 +47,8 @@ export default {
   },
   methods:{
     provjera(){
-      const q = query(collection(db, "savjetiDrugotromjesecje"), where('vrsta_savjeta', 'in', ['opci_savjet'] ))
-      getDocs(q).then((query) => {  
+      const q1 = query(collection(db, "savjetiDrugotromjesecje"), where('vrsta_savjeta', 'in', ['opci_savjet'] ))
+      getDocs(q1).then((query) => {  
         this.ispis1 = [];
         query.forEach((doc) => {
           const data1 = doc.data();
@@ -48,6 +56,18 @@ export default {
             id: data1.id,
             naslov: data1.naslov,
             text: data1.text,
+          });
+        });
+      });
+      const q2 = query(collection(db, "savjetiDrugotromjesecje"), where('vrsta_savjeta', 'in', ['duhovni_savjet'] ))
+      getDocs(q2).then((query) => {  
+        this.ispis2 = [];
+        query.forEach((doc) => {
+          const data2 = doc.data();
+          this.ispis2.push({
+            id: data2.id,
+            naslov: data2.naslov,
+            text: data2.text,
           });
         });
       });

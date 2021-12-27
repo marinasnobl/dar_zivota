@@ -1,19 +1,17 @@
-# dar_zivota
+Naziv aplikacije: Dar života
 
-## Project setup
-```
-npm install
-```
+Tim: Marina Šnobl - msnobl@student.unipu.hr
 
-### Compiles and hot-reloads for development
-```
-npm run serve
-```
+Sveučilište Jurja Dobrile u Puli
 
-### Compiles and minifies for production
-```
-npm run build
-```
+Fakultet Informatike - https://fipu.unipu.hr
 
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+Kolegij: Programsko inženjerstvo
+
+Mentori: doc.dr.sc. Nikola Tanaković
+
+Opis funkcionalnosti:
+- registracija korisnika
+- odabir datuma zadnje mjesecnice
+- aplikacija izračunava tromjesečje trudnoće te nudi savjete i duhovne misli potpore
+- dnevnik trudnoće  
