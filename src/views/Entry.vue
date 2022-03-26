@@ -34,7 +34,7 @@
 import Datepicker from "vuejs-datepicker";
 import { hr } from "vuejs-datepicker/dist/locale";
 import moment, { now } from "moment";
-import { collection, addDoc, updateDoc, doc} from "firebase/firestore";
+import { collection, setDoc, updateDoc, doc} from "firebase/firestore";
 import { db } from "@/firebase";
 import store from "@/store";
 
@@ -61,15 +61,14 @@ export default {
     izracun() {
       if(store.datum_zadnje_mjesecnice==null){
        try{
-          addDoc(collection(db, store.currentUser), {
-            tip_zabiljeske: "datum_zadnje_mjesecnice",
+          setDoc(doc(db, store.currentUser, "zadnja_mjesecnica"), {
             datum_zadnje_mjesecnice: moment(this.datum).valueOf()
         });
        } catch(e){
          console.error(e)
        }
       }else {
-        const Ref = doc(db, store.currentUser, 'heHJweGVFN25xzvhLXfu');
+        const Ref = doc(db, store.currentUser, "zadnja_mjesecnica");
         updateDoc(Ref, {datum_zadnje_mjesecnice: moment(this.datum).valueOf()})
       }
       let start = moment(this.datum);

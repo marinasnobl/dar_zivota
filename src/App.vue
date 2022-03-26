@@ -96,7 +96,7 @@
 <script>
 import { firebaseApp } from "@/firebase.js";
 import { getAuth, onAuthStateChanged, signOut } from "firebase/auth";
-import { collection, query, where, getDocs } from "firebase/firestore";
+import { collection, query, where, getDocs, doc} from "firebase/firestore";
 import { db } from "@/firebase";
 import store from "@/store.js";
 import moment, { now } from "moment";
@@ -127,18 +127,16 @@ export default {
     provjera() {
       let handle1 = setTimeout(() => {
         console.log("Pozivanje firebase");
-        const q = query(
-          collection(db, store.currentUser),
-          where("tip_zabiljeske", "in", ["datum_zadnje_mjesecnice"])
-        );
-        console.log("Dohvacanje podatka");
+        const q = query(collection(db, store.currentUser))
         getDocs(q).then((query) => {
-          query.forEach((doc) => {
-            const data1 = doc.data();
-            store.datum_zadnje_mjesecnice = data1.datum_zadnje_mjesecnice;
-          });
+        console.log("Dohvacanje podatka");
+        query.forEach((doc) => {
+          const data1 = doc.data();
+          store.datum_zadnje_mjesecnice=data1.datum_zadnje_mjesecnice;
         });
+      });
       }, 3000);
+
       let handle2 = setTimeout(() => {
         console.log("Izracun trudnoce");
         let start = moment(store.datum_zadnje_mjesecnice);
@@ -150,6 +148,8 @@ export default {
       }, 5000);
     },
     logout() {
+      store.datum_zadnje_mjesecnice == null;
+      store.dani_trudnoce == null;
       const auth = getAuth();
       signOut(auth).then(() => {
         this.$router.push({ name: "Login" });

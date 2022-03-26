@@ -142,7 +142,7 @@ import Datepicker from "vuejs-datepicker";
 import { hr } from "vuejs-datepicker/dist/locale";
 import moment, { now } from "moment";
 import currentUser from "@/store";
-import { collection, addDoc, getDocs, doc, where, query, deleteDoc } from "firebase/firestore";
+import { collection, addDoc, getDocs, doc, where, query, deleteDoc, setDoc, orderBy } from "firebase/firestore";
 import { db } from "@/firebase";
 import ZapisDnevnika from "@/components/ZapisDnevnika.vue";
 import store from '@/store';
@@ -184,7 +184,7 @@ export default {
         this.dohvatiZabiljesku3();
     },
     dohvatiZabiljesku1() {
-      const q = query(collection(db, store.currentUser), where('tip_zabiljeske', 'in', ['razvoj_djeteta'] ))
+     const q = query(collection(db, store.currentUser + "_razvoj_djeteta"),orderBy("vrijemeUnosa", "desc"))
       getDocs(q).then((query) => {
         this.ispis1 = [];
         query.forEach((doc) => {
@@ -198,7 +198,7 @@ export default {
       });
     },
     dohvatiZabiljesku2() {
-      const q = query(collection(db, store.currentUser), where('tip_zabiljeske', 'in', ['promjene_kod_majke'] ))
+      const q = query(collection(db, store.currentUser +"_promjene_kod_majke"),orderBy("vrijemeUnosa", "desc"))
       getDocs(q).then((query) => {
         this.ispis2 = [];
         query.forEach((doc) => {
@@ -212,7 +212,7 @@ export default {
       });
     },
     dohvatiZabiljesku3() {
-      const q = query(collection(db, store.currentUser), where('tip_zabiljeske', 'in', ['pregled_kod_ginekologa'] ))
+      const q = query(collection(db, store.currentUser + "_pregled_kod_ginekologa"),orderBy("vrijemeUnosa", "desc"))
       getDocs(q).then((query) => {
         this.ispis3 = [];
         query.forEach((doc) => {
@@ -230,8 +230,7 @@ export default {
         alert("Niste unjeli bilješku");
       } else {
         try {
-          addDoc(collection(db, store.currentUser), {
-            tip_zabiljeske: "razvoj_djeteta",
+          addDoc(collection(db, store.currentUser + "_razvoj_djeteta"), {
             zabiljeska: this.text1,
             vrijemeUnosa: Date.now(),
           });
@@ -248,8 +247,7 @@ export default {
         alert("Niste unjeli bilješku");
       } else {
         try {
-          addDoc(collection(db, store.currentUser), {
-            tip_zabiljeske: "promjene_kod_majke",
+         addDoc(collection(db, store.currentUser + "_promjene_kod_majke"), {
             zabiljeska: this.text2,
             vrijemeUnosa: Date.now(),
           });
@@ -266,8 +264,7 @@ export default {
         alert("Niste unjeli bilješku ili datum pregleda");
       } else {
         try {
-          addDoc(collection(db, store.currentUser), {
-            tip_zabiljeske: "pregled_kod_ginekologa",
+          addDoc(collection(db, store.currentUser + "_pregled_kod_ginekologa"), {
             zabiljeska: this.text3,
             vrijemeUnosa: Date.now(),
             datumPregleda: moment(this.datum).valueOf(),
