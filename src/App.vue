@@ -135,7 +135,7 @@ export default {
           store.datum_zadnje_mjesecnice=data1.datum_zadnje_mjesecnice;
         });
       });
-      }, 3000);
+      }, 2000);
 
       let handle2 = setTimeout(() => {
         console.log("Izracun trudnoce");
@@ -150,9 +150,10 @@ export default {
     logout() {
       store.datum_zadnje_mjesecnice == null;
       store.dani_trudnoce == null;
+      store.currentUser == null;
       const auth = getAuth();
       signOut(auth).then(() => {
-        this.$router.push({ name: "Login" });
+        this.$router.replace({ name: "Login" });
       });
     },
   },

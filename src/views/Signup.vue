@@ -38,7 +38,7 @@
               />
             </div>
             <button type="button" @click="signup" class="btn btn-primary">
-              Pošalji
+              Registriraj
             </button>
           </form>
         </div>
