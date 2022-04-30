@@ -82,7 +82,7 @@
                 {{ store.currentUser }}
               </p>
                <p v-if="store.dani_trudnoce && store.currentUser" class="nav-link">
-                {{ store.dani_trudnoce }}
+                dan trudnoće: {{ store.dani_trudnoce }}
                </p>
             </div>
           </div>
@@ -148,9 +148,9 @@ export default {
       }, 5000);
     },
     logout() {
-      store.datum_zadnje_mjesecnice == null;
-      store.dani_trudnoce == null;
-      store.currentUser == null;
+      store.datum_zadnje_mjesecnice = null;
+      store.dani_trudnoce = null;
+      store.currentUser = null;
       const auth = getAuth();
       signOut(auth).then(() => {
         this.$router.replace({ name: "Login" });

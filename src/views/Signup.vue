@@ -1,6 +1,8 @@
 <template>
   <div class="about">
+    <div id="home_tekst">
     <h1>Stranica za registraciju</h1>
+    </div>
     <div class="container">
       <div class="row">
         <div class="col-sm"></div>
@@ -24,7 +26,7 @@
                 v-model="password1"
                 class="form-control"
                 id="exampleInputPassword1"
-                placeholder="Password"
+                placeholder="Lozinka"
               />
             </div>
             <div class="form-group">
@@ -34,10 +36,11 @@
                 v-model="password2"
                 class="form-control"
                 id="exampleInputPassword2"
-                placeholder="Password"
+                placeholder="Lozinka"
               />
             </div>
-            <button type="button" @click="signup" class="btn btn-primary">
+            <br>
+            <button type="button" @click="signup" class="btn btn-outline-secondary">
               Registriraj
             </button>
           </form>
@@ -78,7 +81,7 @@ export default {
               this.$router.replace({name: 'Home'});
             })
             .catch(function (error) {
-              console.error("Došlo je do greške", error);
+              aler("Došlo je do pogreške, ponovite");
             });
         } else {
           alert("Lozinke moraju biti jednake!");

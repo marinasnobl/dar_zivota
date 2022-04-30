@@ -1,22 +1,11 @@
 <template>
-  <div class="card">
-    <div class="card-body">
-      <div class="row">
-        <div class="col-10">
-          {{ vrijemeZapisa }} <br />
+  <div id="kartica" class="card">
+         <div id="kartica_vrijeme_zapisa"> 
+           {{ vrijemeZapisa }} 
+         </div>
+         <div id="kartica_biljeska">
           {{ zapis }}
-        </div>
-        <div class="col">
-          <input
-         
-            class="form-check-input"
-            type="checkbox"
-            value="test"
-            id="defaultCheck1"
-          />
-        </div>
-      </div>
-    </div>
+         </div>
   </div>
 </template>
 
@@ -33,3 +22,18 @@ export default {
   },
 };
 </script>
+<style lang="scss">
+#kartica{
+  border-color: rgb(167, 164, 164);
+}
+#kartica_vrijeme_zapisa{
+  text-align: left;
+  margin-left: 5px;
+  font-style: italic;
+  font-weight: bold;
+}
+#kartica_biljeska{
+  font-family:'CommercialScript BT';
+  font-size: 150%;
+}
+</style>

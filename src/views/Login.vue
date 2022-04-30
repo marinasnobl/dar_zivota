@@ -1,6 +1,9 @@
-<template>
-  <div class="about">
+<template>  
+  <div id="pozadina" class="about"> 
+    <div id="home_tekst">
     <h1>Stranica za prijavu</h1>
+    </div>
+    <br>
     <div class="container">
       <div class="row">
         <div class="col-sm"></div>
@@ -28,17 +31,19 @@
                 placeholder="Password"
               />
             </div>
-            <button type="button" @click="login()" class="btn btn-primary">Prijava</button>
+            <br>
+            <button type="button" @click="login()" class="btn btn-outline-secondary">Prijava</button>
           </form>
         </div>
         <div class="col-sm"></div>
       </div>
       <div>
         <a href="#" >
-           <router-link to="/signup">Nemate račun? Registrirajte se...</router-link>
+           <router-link id="link" to="/signup"> Nemate račun? Registrirajte se...</router-link>
         </a>
       </div>
     </div>
+    <br><br><br><br><br><br>
   </div>
 </template>
 
@@ -69,3 +74,9 @@ export default {
   }  
 }
 </script>
+<style>
+  #link{
+    font-family: Helvetica, sans-serif;
+    color: #178d7d;
+  }
+</style>

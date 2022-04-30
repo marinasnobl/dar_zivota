@@ -4,8 +4,8 @@
     <img src="@/assets/trece_tromjesecje.png" /><br />
     <div class="container">
       <div class="row">
-        <div class="col"><h2>Savjeti</h2></div>
-        <div class="col"><h2>Duhovnost</h2></div>
+        <div id="home_tekst" class="col"><h2>Savjeti za tjelesno zdravlje</h2></div>
+        <div id="home_tekst" class="col"><h2>Savjeti za duhovno zdravlje</h2></div>
       </div>
       <div class="row">
         <div class="col">

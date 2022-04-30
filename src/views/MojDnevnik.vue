@@ -6,7 +6,7 @@
     <div class="container">
       <div class="row row-cols-3">
         <div class="col">
-          <h4>Razvoj djeteta</h4>
+          <h1 id="naslov" >Razvoj djeteta</h1>
           <br />
           <div class="input-group mb-3">
             <button
@@ -24,18 +24,18 @@
               placeholder="Dodajte novu bilješku"
               aria-describedby="button-addon1"
             />
-            <button
-              class="btn btn-outline-secondary"
-              type="button"
-              id="button-addon1"
-              @click="obrisi1"
-            >
-              Obriši
-            </button>
           </div>
+          <div class="col">
+              <zapis-dnevnika
+                v-for="element in ispis1"
+                :key="element.id"
+                :zapis="element.biljeska"
+                :vrijeme="element.datumBiljeske"
+              /> 
         </div>
-        <div class="col">
-          <h4>Promjene kod majke</h4>
+        </div>
+        <div id="dnevnik" class="col">
+          <h1 id="naslov">Promjene kod majke</h1>
           <br />
           <div class="input-group mb-3">
             <button
@@ -53,18 +53,20 @@
               placeholder="Dodajte novu bilješku"
               aria-describedby="button-addon2"
             />
-            <button
-              class="btn btn-outline-secondary"
-              type="button"
-              id="button-addon1"
-              @click="obrisi2"
-            >
-              Obriši
-            </button>
           </div>
+          <div class="col">
+          
+              <zapis-dnevnika
+                v-for="element in ispis2"
+                :key="element.id"
+                :zapis="element.biljeska"
+                :vrijeme="element.datumBiljeske"
+              />
+            
+        </div>
         </div>
         <div class="col">
-          <h4>Pregled kod ginekologa</h4>
+          <h1 id="naslov">Pregled kod ginekologa</h1>
           <br />
           <div class="input-group mb-3">
             <button
@@ -82,57 +84,20 @@
               placeholder="Dodajte novu bilješku"
               aria-describedby="button-addon3"
             />
-            <button
-              class="btn btn-outline-secondary"
-              type="button"
-              id="button-addon1"
-              @click="obrisi3"
-            >
-              Obriši
-            </button>
           </div>
-          <datepicker :language="hr" v-model="datum"></datepicker><br />
-        </div>
-      </div>
-    </div>
-    <div class="container">
-      <div class="row row-cols-3">
-        <div class="col">
-          <div class="card">
-            <div class="card-body">
-              <zapis-dnevnika
-                v-for="element in ispis1"
-                :key="element.id"
-                :zapis="element.biljeska"
-                :vrijeme="element.datumBiljeske"
-              />
-            </div>
-          </div>
-        </div>
-        <div class="col">
-          <div class="card">
-            <div class="card-body">
-              <zapis-dnevnika
-                v-for="element in ispis2"
-                :key="element.id"
-                :zapis="element.biljeska"
-                :vrijeme="element.datumBiljeske"
-              />
-            </div>
-          </div>
-        </div>
-        <div class="col">
-          <div class="card">
-            <div class="card-body">
+          <datepicker :language="hr" v-model="datum" placeholder="Odaberite datum pregleda"></datepicker><br />
+          <div class="col">
+          
               <zapis-dnevnika
                 v-for="element in ispis3"
                 :key="element.id"
                 :zapis="element.biljeska"
                 :vrijeme="element.datumZaPregled"
               />
-            </div>
-          </div>
+            
         </div>
+        </div>
+        
       </div>
     </div>
   </div>
@@ -285,3 +250,15 @@ export default {
   },
 };
 </script>
+<style lang="scss">
+#dnevnik{
+  border-color: rgb(167, 164, 164);
+  border-style:solid;
+  border-top:0;
+  border-bottom: 0;
+}
+#naslov{
+  font-family:'CommercialScript BT';
+  color: #178D7D;
+}
+</style>
