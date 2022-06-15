@@ -106,8 +106,7 @@
 import Datepicker from "vuejs-datepicker";
 import { hr } from "vuejs-datepicker/dist/locale";
 import moment, { now } from "moment";
-import currentUser from "@/store";
-import { collection, addDoc, getDocs, doc, where, query, deleteDoc, setDoc, orderBy } from "firebase/firestore";
+import { collection, addDoc, getDocs, query, orderBy } from "firebase/firestore";
 import { db } from "@/firebase";
 import ZapisDnevnika from "@/components/ZapisDnevnika.vue";
 import store from '@/store';
@@ -132,22 +131,6 @@ export default {
     this.dohvatiZabiljesku3();
   },
   methods: {
-    obrisi1() {
-        deleteDoc(doc(db, 'razvoj_djeteta', ''))//kod drugih navodnih znakova treba doći id od označene bilješke
-        console.log("Test")
-        alert("Uspješno obrisano")
-        this.dohvatiZabiljesku1();
-    },
-    obrisi2() {
-        deleteDoc(doc(db, 'promjene_kod_majke', ''))//kod drugih navodnih znakova treba doći id od označene bilješke
-        alert("Uspješno obrisano")
-        this.dohvatiZabiljesku2();
-    },
-    obrisi3() {
-        deleteDoc(doc(db, 'pregled_kod_ginekologa', ''))//kod drugih navodnih znakova treba doći id od označene bilješke
-        alert("Uspješno obrisano")
-        this.dohvatiZabiljesku3();
-    },
     dohvatiZabiljesku1() {
      const q = query(collection(db, store.currentUser + "_razvoj_djeteta"),orderBy("vrijemeUnosa", "desc"))
       getDocs(q).then((query) => {

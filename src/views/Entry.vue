@@ -4,8 +4,8 @@
        <img src="@/assets/logo2.png" >
       <h3>
         <br>
-        Izračunaj u kojem si mjesecu trudnoće <br />
-        i otkrij što te čeka na ovome putovanju <br />
+        Unesi datum zadnje mjesečnice i izračunaj u kojem si mjesecu trudnoće. <br />
+        Otkrij što te čeka na ovome putovanju <br />
         <br />
       </h3>
     </div>
@@ -96,8 +96,6 @@ export default {
 };
 </script>
 <style>
-#pozadina {
-}
 #tipka_izracunaj{
   text-align: left;
 }

@@ -81,7 +81,7 @@ export default {
               this.$router.replace({name: 'Home'});
             })
             .catch(function (error) {
-              aler("Došlo je do pogreške, ponovite");
+              alert("Došlo je do pogreške, ponovite");
             });
         } else {
           alert("Lozinke moraju biti jednake!");

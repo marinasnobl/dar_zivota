@@ -44,7 +44,7 @@
                 class="nav-link"
                 href="#"
               >
-                <router-link to="/PrvoTromjesecje"
+                <router-link to="/PrvoTromjesecje" class="nav-link"
                   >Prvo tromjesečje</router-link
                 >
               </a>
@@ -96,10 +96,9 @@
 <script>
 import { firebaseApp } from "@/firebase.js";
 import { getAuth, onAuthStateChanged, signOut } from "firebase/auth";
-import { collection, query, where, getDocs, doc} from "firebase/firestore";
-import { db } from "@/firebase";
 import store from "@/store.js";
-import moment, { now } from "moment";
+import 'bootstrap/dist/js/bootstrap.min.js';
+import 'jquery/dist/jquery.min.js';
 
 const auth = getAuth();
 onAuthStateChanged(auth, (user) => {
@@ -120,33 +119,7 @@ export default {
       store,
     };
   },
-  mounted() {
-    this.provjera();
-  },
   methods: {
-    provjera() {
-      let handle1 = setTimeout(() => {
-        console.log("Pozivanje firebase");
-        const q = query(collection(db, store.currentUser))
-        getDocs(q).then((query) => {
-        console.log("Dohvacanje podatka");
-        query.forEach((doc) => {
-          const data1 = doc.data();
-          store.datum_zadnje_mjesecnice=data1.datum_zadnje_mjesecnice;
-        });
-      });
-      }, 2000);
-
-      let handle2 = setTimeout(() => {
-        console.log("Izracun trudnoce");
-        let start = moment(store.datum_zadnje_mjesecnice);
-        let end = moment(now());
-        let duration = moment.duration(end.diff(start));
-        let days = duration.asDays();
-        days = Math.round(days);
-        store.dani_trudnoce = days;
-      }, 5000);
-    },
     logout() {
       store.datum_zadnje_mjesecnice = null;
       store.dani_trudnoce = null;
