@@ -8,7 +8,7 @@ Fakultet Informatike - https://fipu.unipu.hr
 
 Kolegij: Programsko inženjerstvo
 
-Mentori: doc.dr.sc. Nikola Tanaković
+Mentori: doc.dr.sc. Nikola Tanković
 
 Opis funkcionalnosti:
 - registracija korisnika
